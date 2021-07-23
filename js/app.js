@@ -33,24 +33,17 @@ function inicioApp() {
 
 //Valida el formulario
 function validarformulario(e) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+    
     if(e.target.value === "") {
         e.target.classList.remove('border-green-500');
         e.target.classList.add('error','border-red-500');
         mensajeError('Todos los campos son requeridos');
         
     } else {
+        
         if(this.type === 'email') {
-            if (re.test(e.target.value)) {
-                e.target.classList.remove('error','border-red-500');
-                e.target.classList.add('border-green-500');
-            } else {
-                mensajeError('email no valido');
-                e.target.classList.remove('border-green-500');
-                e.target.classList.add('error','border-red-500');
-            }    
-
+            validarEmail(e.target.value);
+            
         } else {
             e.target.classList.remove('error','border-red-500');
             e.target.classList.add('border-green-500');
@@ -90,4 +83,17 @@ function mensajeError(error) {
 function resetFormulario(e) {
     formulario.reset();
     e.preventDefault();
+}
+
+function validarEmail(campo) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (re.test(campo)) {
+        email.classList.add('border-green-500');          
+        email.classList.remove('error','border-red-500');
+    } else {
+        mensajeError('email no valido');
+        email.classList.remove('border-green-500');
+        email.classList.add('error','border-red-500');
+    }               
 }
