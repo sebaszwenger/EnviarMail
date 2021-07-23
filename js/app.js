@@ -33,30 +33,29 @@ function inicioApp() {
 
 //Valida el formulario
 function validarformulario(e) {
-    
+    const campo = e.target;
+
     if(e.target.value === "") {
-        e.target.classList.remove('border-green-500');
-        e.target.classList.add('error','border-red-500');
+        campo.classList.remove('border-green-500');
+        campo.classList.add('error','border-red-500');
         mensajeError('Todos los campos son requeridos');
         
     } else {
-        
+
         if(this.type === 'email') {
             validarEmail(e.target.value);
             
         } else {
-            e.target.classList.remove('error','border-red-500');
-            e.target.classList.add('border-green-500');
+            campo.classList.remove('error','border-red-500');
+            campo.classList.add('border-green-500');
         }
     }
 
     if (asunto.classList.contains('error') || mensaje.classList.contains('error') || email.classList.contains('error')) {
-        console.log('hay error');
         btnEnviar.disabled = true;
         btnEnviar.classList.add('cursor-not-allowed', 'opacity-50');
 
     } else {
-        console.log('no hay error');
         btnEnviar.disabled = false;
         btnEnviar.classList.remove('cursor-not-allowed', 'opacity-50');
     }
